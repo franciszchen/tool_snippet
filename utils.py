@@ -290,3 +290,21 @@ def save_source_code(
             os.path.join('/home/zchen72/code/noiseFL-v2/', filename),
             os.path.join(log_path, filename)
         )
+        
+#
+def eval_metrics(preds_npy, labels_npy):
+    # labels_npy = np.concatenate(labels_list, axis=None)
+    # preds_npy = np.concatenate(preds_list, axis=None)
+    from sklearn import metrics
+    
+    acc = 100.0 * metrics.accuracy_score(y_true=labels_npy, y_pred=preds_npy)
+    f1 = 100 * metrics.f1_score(y_true=labels_npy, y_pred=preds_npy, average='macro')
+    recall = 100.0 * metrics.recall_score(y_true=labels_npy, y_pred=preds_npy, average='macro')
+    precision = 100.0 * metrics.precision_score(y_true=labels_npy, y_pred=preds_npy, average='macro')
+    jaccard = 100.0 * metrics.jaccard_score(y_true=labels_npy, y_pred=preds_npy, average='micro')
+    jaccard_macro = 100.0 * metrics.jaccard_score(y_true=labels_npy, y_pred=preds_npy, average='macro')
+    #
+    recall_each_phase = 100.0 * metrics.recall_score(y_true=labels_npy, y_pred=preds_npy, average=None)
+    precision_each_phase = 100.0 * metrics.precision_score(y_true=labels_npy, y_pred=preds_npy, average=None)
+    report = metrics.classification_report(y_true=labels_npy, y_pred=preds_npy, digits=5)
+    confusion_matrix = metrics.confusion_matrix(y_true=labels_npy, y_pred=preds_npy)
