@@ -308,3 +308,5 @@ def eval_metrics(preds_npy, labels_npy):
     precision_each_phase = 100.0 * metrics.precision_score(y_true=labels_npy, y_pred=preds_npy, average=None)
     report = metrics.classification_report(y_true=labels_npy, y_pred=preds_npy, digits=5)
     confusion_matrix = metrics.confusion_matrix(y_true=labels_npy, y_pred=preds_npy)
+    return acc, f1, recall, precision, jaccard, jaccard_macro, recall_each_phase, precision_each_phase, report, confusion_matrix 
+
